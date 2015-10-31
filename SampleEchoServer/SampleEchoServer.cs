@@ -9,7 +9,6 @@ namespace SampleEchoServer
 {
     public class Server
     {
-        const string Message = "Echo!";
 
         public async Task StartAsync(int port)
         {
@@ -41,7 +40,7 @@ namespace SampleEchoServer
                                 connected = false;
                                 break;
                             default:
-                                await output.WriteLineAsync(Message);
+                                await output.WriteLineAsync(msg);
                                 break;
                         }
                     }
@@ -55,6 +54,7 @@ namespace SampleEchoServer
 
     class Program
     {
+        //Let's assume that port 8888 is available :)
         static void Main(string[] args) => Task.WaitAll(new Server().StartAsync(8888));
     }
 }
