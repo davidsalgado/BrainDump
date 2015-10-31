@@ -18,12 +18,10 @@ namespace SampleEchoServer
             Console.WriteLine($"Server started on port {port}");
             while (true)
             {
-              HandleConnection(server);
+              HandleClient(server.AcceptTcpClient());
             }
         }
 
-        private void HandleConnection(TcpListener server) => HandleClient(server.AcceptTcpClient());   
-        
         public void HandleClient(TcpClient c)
         {
             string msg = null;
