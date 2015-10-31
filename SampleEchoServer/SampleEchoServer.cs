@@ -7,6 +7,11 @@ using System.Threading.Tasks;
 
 namespace SampleEchoServer
 {
+    class Program
+    {
+        static void Main(string[] args) => Task.WaitAll(new Server().StartAsync(8888));
+    }
+
     public class Server
     {
         const string Message = "Echo!";
@@ -50,12 +55,6 @@ namespace SampleEchoServer
             c.Close();
             Console.WriteLine("bye...");
         }
-    }
-
-
-    class Program
-    {
-        static void Main(string[] args) => Task.WaitAll(new Server().StartAsync(8888));
     }
 }
 
