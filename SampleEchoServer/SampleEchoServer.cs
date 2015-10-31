@@ -7,6 +7,11 @@ using System.Threading.Tasks;
 
 namespace SampleEchoServer
 {
+    class Program
+    {
+        static void Main(string[] args) => Task.WaitAll(new Server().StartAsync(8888));
+    }
+
     public class Server
     {
 
@@ -50,6 +55,7 @@ namespace SampleEchoServer
             Console.WriteLine("bye...");
         }
     }
+<<<<<<< HEAD
 
 
     class Program
@@ -57,5 +63,7 @@ namespace SampleEchoServer
         //Let's assume that port 8888 is available :)
         static void Main(string[] args) => Task.WaitAll(new Server().StartAsync(8888));
     }
+=======
+>>>>>>> origin/master
 }
 
