@@ -3,6 +3,7 @@ using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace SampleEchoServer
 {
@@ -10,7 +11,7 @@ namespace SampleEchoServer
     {
         const string Message = "Echo!";
 
-        public void Start(int port)
+        public async Task StartAsync(int port)
         {
 
             TcpListener server = new TcpListener(IPAddress.Any, port);
@@ -18,11 +19,11 @@ namespace SampleEchoServer
             Console.WriteLine($"Server started on port {port}");
             while (true)
             {
-              HandleClient(server.AcceptTcpClient());
+                await HandleClientAsync( await server.AcceptTcpClientAsync());
             }
         }
 
-        public void HandleClient(TcpClient c)
+        public async Task HandleClientAsync(TcpClient c)
         {
             string msg = null;
             bool connected = true;
@@ -34,13 +35,13 @@ namespace SampleEchoServer
                 {
                     while (connected)
                     {
-                        switch (msg = input.ReadLine())
+                        switch (msg = await input.ReadLineAsync())
                         {
                             case "done":
                                 connected = false;
-                                break;                               
+                                break;
                             default:
-                                output.WriteLine(Message);
+                                await output.WriteLineAsync(Message);
                                 break;
                         }
                     }
@@ -54,6 +55,7 @@ namespace SampleEchoServer
 
     class Program
     {
-        static void Main(string[] args) => new Server().Start(8888);        
+        static void Main(string[] args) => Task.WaitAll(new Server().StartAsync(8888));
     }
 }
+
