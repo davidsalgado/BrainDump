@@ -17,7 +17,6 @@ namespace SampleEchoServer
 
         public async Task StartAsync(int port)
         {
-
             TcpListener server = new TcpListener(IPAddress.Any, port);
             server.Start();
             Console.WriteLine($"Server started on port {port}");
@@ -55,15 +54,6 @@ namespace SampleEchoServer
             Console.WriteLine("bye...");
         }
     }
-<<<<<<< HEAD
 
-
-    class Program
-    {
-        //Let's assume that port 8888 is available :)
-        static void Main(string[] args) => Task.WaitAll(new Server().StartAsync(8888));
-    }
-=======
->>>>>>> origin/master
 }
 
