@@ -17,12 +17,20 @@ namespace SampleEchoServer
 
         public async Task StartAsync(int port)
         {
+
             TcpListener server = new TcpListener(IPAddress.Any, port);
             server.Start();
             Console.WriteLine($"Server started on port {port}");
             while (true)
             {
-                await HandleClientAsync( await server.AcceptTcpClientAsync());
+                try
+                { 
+                    await HandleClientAsync(await server.AcceptTcpClientAsync());
+                }
+                catch (Exception ex)
+                { 
+                    Console.WriteLine($"That hurt... trying to recover from an exception:'{ex.Message}'");
+                }
             }
         }
 
@@ -49,11 +57,10 @@ namespace SampleEchoServer
                         }
                     }
                 }
+
             }
             c.Close();
             Console.WriteLine("bye...");
         }
     }
-
 }
-
