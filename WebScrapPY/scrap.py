@@ -1,5 +1,8 @@
 import re
-from urllib.request import Request, urlopen
+try:
+	from urllib.request import Request, urlopen
+except ImportError:
+	from urllib2 import Request, urlopen
 
 in_file = open('in.txt','r')
 out_file = open('out.txt','w+')
